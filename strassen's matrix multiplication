@@ -1,0 +1,38 @@
+#include <stdio.h>
+
+void strassenMultiply(int A[2][2], int B[2][2], int C[2][2]) {
+    // Variables to store the 7 products, P1 to P7
+    int P1, P2, P3, P4, P5, P6, P7;
+
+    // Applying the Strassen's formulas to calculate the P1 to P7
+    P1= (A[0][0] + A[1][1]) * (B[0][0] + B[1][1]); // (a+d)*(e+h)
+    P2= (A[1][0] + A[1][1]) * B[0][0];             // (c+d)*e
+    P3= A[0][0] * (B[0][1] - B[1][1]);             // a*(f-h)
+    P4= A[1][1] * (B[1][0] - B[0][0]);             // d*(g-e)
+    P5= (A[0][0] + A[0][1]) * B[1][1];             // (a+b)*h
+    P6= (A[1][0] - A[0][0]) * (B[0][0] + B[0][1]); // (c-a)*(e+f)
+    P7= (A[0][1] - A[1][1]) * (B[1][0] + B[1][1]); // (b-d)*(g+h)
+
+    // Using the P1 to P7 to calculate the final entries of the C matrix
+    C[0][0] = P1 + P4 - P5 + P7;
+    C[0][1] = P3 + P5;
+    C[1][0] = P2 + P4;
+    C[1][1] = P1 - P2 + P3 + P6;
+}
+
+void printMatrix(int matrix[2][2]) {
+    printf("[%d, %d]\n[%d, %d]\n", matrix[0][0], matrix[0][1], matrix[1][0], matrix[1][1]);
+}
+
+int main() {
+    int A[2][2] = {{1, 2}, {3, 4}};
+    int B[2][2] = {{5, 6}, {7, 8}};
+    int C[2][2]; // To store the result
+
+    strassenMultiply(A, B, C);
+
+    printf("Result of Strassen's Matrix Multiplication:\n");
+    printMatrix(C);
+
+    return 0;
+}
