@@ -1,0 +1,296 @@
+//maximum and minimum values
+#include<stdio.h>
+void minmaxarray(int arr[],int n){
+	int i,max=arr[0],min=arr[0];
+	for(i=0;i<n;i++)
+	{
+		if(arr[i]<min)
+		min=arr[i];
+		else if(arr[i]>max)
+		max=arr[i];
+	}
+	printf("\nMaximum and Minimum value of array is %d and %d",min,max);
+}
+int main()
+{
+	int i,n;
+	int arr[n];
+	printf("\nenter the size of the array");
+	scanf("%d",&n);
+	printf("\nenter the array elements");
+	for(i=0;i<n;i++){
+	scanf("%d",&arr[i]);
+    }
+    minmaxarray(arr,n);
+	return 0;
+}
+//binary search
+#include<stdio.h>
+int binarysearch(int arr[],int low,int high,int key)
+{
+	while(low<=high)
+	{ 
+	    int mid=low+(high-low)/2;
+		if(arr[mid]==key)
+		return mid;
+		else if (arr[mid]<key)
+		low=mid+1;
+		else
+		high=mid-1;
+	}
+	return -1;
+}
+int main()
+{
+	int i,n;
+	printf("\nenter the size of the array:");
+	scanf("%d",&n);
+	int arr[n];
+	printf("\nenter the array elements:------");
+	for(i=0;i<=n;i++)
+	{
+		scanf("%d",&arr[i]);
+	}
+	int key;
+	printf("\nenter the key value:");
+	scanf("%d",&key);
+	int result = binarysearch(arr,0,n-1,key);
+	if (result==-1){
+		printf("\n%delement not found",key);
+	}
+	else{
+	printf("\n%delement is at the found index %d",key,result);	
+	}
+	return 0;
+	
+}
+//factorial recursion
+#include<stdio.h>
+int factorial(int n)
+{
+	if(n==0)
+	return 1;
+	else
+	return n*factorial(n-1);
+}
+int main()
+{ 
+    int num,fact;
+	printf("\nenter the number");
+	scanf("%d",&num);
+	fact=factorial(num);
+	printf("\nfactorial of %d is %d",num,fact);
+	return 0;
+}
+//linear search
+#include<stdio.h>
+
+int linearsearch(int n, int key, int arr[]) {
+    int i;
+    for(i = 0; i < n; i++) {
+        if(arr[i] == key)
+            return i; // Return the index where key is found
+    }
+    return -1; // Return -1 if key is not found
+}
+
+int main() {
+    int i, n, key;
+
+    printf("\nEnter the size of the array: ");
+    scanf("%d", &n);
+
+    int arr[n]; // Declare array after getting the value of n
+
+    printf("\nEnter the array elements: ");
+    for(i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+
+    printf("\nEnter the key value: ");
+    scanf("%d", &key);
+
+    int result = linearsearch(n, key, arr);
+
+    if(result == -1)
+        printf("\n%d is not found in the array.", key);
+    else
+        printf("\n%d is found at index %d.", key, result);
+
+    return 0;
+}
+//gcd 
+#include <stdio.h>
+
+int main() {
+    int n1, n2, gcd;
+    
+    printf("Enter two positive integers: ");
+    scanf("%d %d", &n1, &n2);
+
+    // Finding GCD
+    while (n2 != 0) {
+        int temp = n2;
+        n2 = n1 % n2;
+        n1 = temp;
+    }
+    
+    gcd = n1;
+
+    printf("G.C.D of %d and %d is %d.", n1, n2, gcd);
+    
+    return 0;
+}
+//pascal triangle
+#include<stdio.h>
+
+int main() {
+    int rows, i, coef = 1, j, space;
+    printf("\nEnter the number of rows: ");
+    scanf("%d", &rows);
+    
+    for(i = 0; i < rows; i++) {
+        for(space = 1; space <= rows - i; space++)
+            printf(" ");
+        
+        for(j = 0; j <= i; j++) {
+            if(i == 0 || j == 0)
+                coef = 1;
+            else
+                coef = coef * (i - j + 1) / j;
+            
+            printf("%d ", coef);
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+//sum of digits 
+#include<stdio.h>  
+ int main()    
+{    
+int n,sum=0,m;    
+printf("Enter a number:");    
+scanf("%d",&n);    
+while(n>0)    
+{    
+m=n%10;    
+sum=sum+m;    
+n=n/10;    
+}    
+printf("Sum is=%d",sum);    
+return 0;  
+}  
+//binomial coefficient
+#include <stdio.h> 
+int main() {
+    int n, k;
+    printf("Enter the values of n and k: ");
+    scanf("%d %d", &n, &k);
+    int result = 1;
+    if (k > n - k)
+        k = n - k;
+    for (int i = 0; i < k; ++i) {
+        result *= (n - i);
+        result /= (i + 1);
+    }
+    printf("Binomial coefficient C(%d, %d) is %d\n", n, k, result);
+    return 0;
+}
+//sum of even fibonaci
+#include <stdio.h>
+int main() {
+    int limit;
+    printf("Enter the limit: ");
+    scanf("%d", &limit);
+    int t1 = 1, t2 = 1, t3 = t1 + t2, sum = 0;
+    while (t3 <= limit) {
+        sum += t3;
+        t1 = t2 + t3;
+        t2 = t3 + t1;
+        t3 = t1 + t2;
+    }
+    printf("Sum of even Fibonacci numbers up to %d is: %d\n", limit, sum);
+    return 0;
+}
+//selection sort
+#include <stdio.h>
+
+void selectionSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++)
+        for (int j = i + 1; j < n; j++)
+            if (arr[j] < arr[i]) {
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+}
+
+int main() {
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Array before sorting:\n");
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+    printf("\n");
+
+    selectionSort(arr, n);
+
+    printf("Array after sorting:\n");
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+    printf("\n");
+
+    return 0;
+}
+//bubble sort
+#include <stdio.h>
+
+void bubbleSort(int arr[], int n) {
+    while (n--) {
+        for (int i = 0; i < n; i++)
+            if (arr[i] > arr[i + 1]) {
+                int temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+    }
+}
+
+int main() {
+    int arr[] = {64, 25, 12, 22, 11};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Array before sorting:\n");
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+    printf("\n");
+
+    bubbleSort(arr, n);
+
+    printf("Array after sorting:\n");
+    for (int i = 0; i < n; i++) printf("%d ", arr[i]);
+    printf("\n");
+
+    return 0;
+}
+//perfect number
+#include<stdio.h>  
+#include<conio.h>  
+void main()  
+{  
+int i = 1, num, Sum = 0;  
+printf(" Enter any number to check Perfect Number \n");  
+scanf("%d", &num);  
+  
+while(i < num )  
+                     {  
+                               if(num % i == 0)  
+                               Sum = Sum + i;  
+                               i++;  
+                     }  
+           if(Sum == num)  
+                  printf("\n %d is Perfect Number", num);  
+           else  
+           printf("\n %d is not a Perfect Number", num);  
+getch();  
+}   
+//
